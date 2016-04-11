@@ -10,7 +10,14 @@
 
 using namespace std;
 
+#include "LispParser.h"
+
 int main() {
-	cout << "!!!Hello World!!!" << endl; // prints !!!Hello World!!!
+	LispParser parser;
+
+	std::string code = "(+ 1 2 3 (- 2 3 (altaExpression 2 4)))";
+
+	parser.parseLispCode(code);
+
 	return 0;
 }

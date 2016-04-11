@@ -15,7 +15,7 @@ using namespace std;
 int main() {
 	LispParser parser;
 
-	std::string code = "(+ 1 2 3 (- 2 3 (altaExpression 2 4)))";
+	std::string code = "(+ 1 2 3 (+ 2 3 (+ 2 4)))";
 
 	parser.parseLispCode(code);
 

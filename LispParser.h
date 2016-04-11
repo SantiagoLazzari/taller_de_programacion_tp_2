@@ -12,7 +12,6 @@
 
 class LispParser {
 private:
-	insertSpacesBetweenBrackets(std::string&aString);
 
 public:
 	LispParser();

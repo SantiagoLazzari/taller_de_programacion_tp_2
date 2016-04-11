@@ -24,11 +24,12 @@ LispParser::~LispParser() {
 
 }
 
-std::string LispParser::insertSpacesBetweenBrackets(std::string& aString) {
-  for (unsigned position = 0 ; position < aString.length() ; position ++) {
-    if (aString[position] == ')' || aString[position] == '(') {
-      aString.insert(position, " ");
-    }
+std::string insertSpacesBetweenBrackets(std::string& aString) {
+    for (unsigned position = 0 ; position < aString.length() ; position ++) {
+        if (aString[position] == ')' || aString[position] == '(') {
+          aString.insert(position + 1, " ");
+          aString.insert(position, " ");
+        }
     ++ position;
   }
 
@@ -36,29 +37,32 @@ std::string LispParser::insertSpacesBetweenBrackets(std::string& aString) {
 }
 
 void LispParser::parseLispCode(std::string&lispCode) {
-  std::string newLispCode = this->insertSpacesBetweenBrackets(lispCode);
+    std::string newLispCode = insertSpacesBetweenBrackets(lispCode);
 
-  std::istringstream buf(lispCode);
-  std::istream_iterator<std::string> beg(buf), end;
+    cout<<newLispCode<<endl;
 
-  std::vector<std::string> tokens(beg, end); // done!
+    std::istringstream buf(lispCode);
+    std::istream_iterator<std::string> beg(buf), end;
 
-  std::stack<std::string> expressionsStack;
+    std::vector<std::string> tokens(beg, end); // done!
 
-  for (unsigned int i = 0 ; i < tokens.size() ; i++) {
-  	std::string parsingString = tokens[i];
-  	std::string expression;
-  	std::string parameter;
 
-  	if (parsingString.substr(0, 1).compare("(") == 0) {
-  		expression = parsingString.substr(1, parsingString.length());
-  		cout << "expression push " << expression << endl;
-  		expressionsStack.push(expression);
-  	}
+    std::stack<std::string> expressionsStack;
 
-  	if (parsingString.substr(parsingString.length() - 1, parsingString.length()).compare(")") == 0) {
+    for (unsigned int i = 0 ; i < tokens.size() ; i++) {
+        std::string parsingString = tokens[i];
+        std::string expression;
+        std::string parameter;
 
-  	}
+        if (parsingString.substr(0, 1).compare("(") == 0) {
+            expression = parsingString.substr(1, parsingString.length());
+            cout << "expression push " << expression << endl;
+            expressionsStack.push(expression);
+        }
+
+        if (parsingString.substr(parsingString.length() - 1, parsingString.length()).compare(")") == 0) {
+
+        }
   }
 
   for (unsigned i = 0 ; i < expressionsStack.size() ; i++) {
